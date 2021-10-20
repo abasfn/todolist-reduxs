@@ -9,13 +9,13 @@ import styles from '../styles/Home.module.css'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { dataType, inshialState } from '../action/model/statemodel'
+import { dataType } from '../action/model/statemodel'
 import { DeleteItem } from '../action'
 import ModalEdit from '../component/modal-edit/modaledit'
 
 const Home: NextPage = () => {
   const item = useSelector(RoteItemreduser);
-  const data: any = useSelector(reduserDtae);
+  const data = useSelector(reduserDtae);
   const [edit, setedit] = useState<Boolean>(false);
   const dispach = useDispatch();
   const handelDelete = (item: dataType) => {
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <ModalBoxs />
-      {data.state.map((item: dataType, index: number) => {
+      {data.map((item, index) => {
         return (
           <Grid container
             direction="row"

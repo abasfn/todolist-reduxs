@@ -1,22 +1,14 @@
 import { AnyAction } from "redux"
-import { dataType, inshialState, stateModel } from "../action/model/statemodel"
+import { dataType, stateModel } from "../action/model/statemodel"
 
-const inishialState: inshialState = {
-    state: [],
-    index: -1
-}
-export const dataReduser = (state: inshialState = inishialState, action: AnyAction) => {
+export const dataReduser = (state: dataType[] = [], action: AnyAction) => {
     if (action.type === 'ADDITEM') {
-        state.state = [...state.state, action.payload]
+        state = [...state, action.payload]
     }
     if (action.type === 'DELETEITEM') {
-        debugger
-        let delet = state.state.filter(item => item != action.payload);
-        return state.state = [...delet]
+        let delet = state.filter(item => item != action.payload);
+        return [...delet]
     }
-    if (action.type === 'SETINDEX') {
-
-    }
-    return { ...state }
+    return [...state]
 }
 export const reduserDtae = (state: stateModel) => state.dataReduser;
