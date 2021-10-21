@@ -28,8 +28,9 @@ const ModalBoxs = (props: ModalBoxsType) => {
 
         // console.log("_data =>",_data);
 
-           console.log(errors);
-           
+        if (errors) {
+            alert('abas')
+        }
 
         dispach(AddItem(data));
     }
@@ -75,6 +76,7 @@ const ModalBoxs = (props: ModalBoxsType) => {
                             <Box>
                                 <Box mt={2}>
                                     <TextField {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstName'} variant="standard" />
+                                    {errors.firstName&&<p>this is the reuired</p>}
                                 </Box>
                                 <Box mt={2}>
                                     <TextField {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastName'} variant="standard" />
@@ -83,7 +85,7 @@ const ModalBoxs = (props: ModalBoxsType) => {
                                     <TextField   {...register('age', { required: true, maxLength: 3 })} sx={{ width: 1 }} type='number' id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField    {...register('phoneNumber', { required: true, maxLength: 11})} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
+                                    <TextField    {...register('phoneNumber', { required: true, maxLength: 11 })} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>
