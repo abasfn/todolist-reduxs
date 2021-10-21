@@ -17,20 +17,20 @@ type ModalBoxsType = {
     paragraph?: string;
 }
 const ModalBoxs = (props: ModalBoxsType) => {
+
     const reducerData = useSelector(reduserDtae);
 
     const dispach = useDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<dataType>();
+   
     const onSubmit = (data: dataType) => {
+
         // const _data = {};
 
         // Object.assign(_data, data , {id : reducerData.length + 1});
 
         // console.log("_data =>",_data);
-
-        if (errors) {
-            alert('abas')
-        }
+      
 
         dispach(AddItem(data));
     }
@@ -48,7 +48,14 @@ const ModalBoxs = (props: ModalBoxsType) => {
     };
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () =>{
+        if (errors) {
+            alert('abas')
+            return
+        }
+        setOpen(false);
+
+    } 
 
     return (
         <div>
