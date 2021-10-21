@@ -10,7 +10,7 @@ export const dataReduser = (state: dataType[] = [], action: AnyAction) => {
         return [...delet]
     }
     if (action.type === 'EDITITEM') {
-        // debugger
+        debugger
         const found = state.indexOf(action.payload);
         console.log(found);
     }

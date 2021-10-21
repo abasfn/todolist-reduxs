@@ -6,12 +6,19 @@ export const ItemReduser = (state: dataType[] = [], action: AnyAction) => {
     //     return { ...state}
     // }
     // return { ...state}
-    switch(action.type){
-        case "SETDATA":
-            state = action.payload;
-            return action.payload;
-            default:
-                return state
+    // switch(action.type){
+    //     case "SETDATA":
+    //         state = action.payload;
+    //         return action.payload;
+    //         default:
+    //             return state
+    // }
+    if (action.type === 'SETDATA') {
+        state = action.payload;
+        console.log(state);
+        
+        return action.payload
     }
+    return state
 }
 export const RoteItemreduser = (state: stateModel) => state.ItemReduser;
