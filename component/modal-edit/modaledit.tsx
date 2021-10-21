@@ -7,8 +7,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import { useDispatch } from 'react-redux';
-import { AddItem } from '../../action';
+import { useDispatch, useSelector } from 'react-redux';
+import { EditItem } from '../../action';
+import { RoteItemreduser } from '../../reduser/item';
+import { dataType } from '../../action/model/statemodel';
 
 type ModalEditType = {
     ModatTitle?: string;
@@ -16,24 +18,30 @@ type ModalEditType = {
     onClick?: () => void;
 }
 const ModalEdit = (props: ModalEditType) => {
+    const item = useSelector(RoteItemreduser);
+    console.log(item);
+
     const dispach = useDispatch();
-    type dataType = {
-        farstname: string;
-        lastname: string;
-        age: number;
-        phonenumber: number;
-    }
+
     type ForemValue = {
-        firstname: string,
-        lastname: string,
-        age: string,
-        phonenumber: string,
+        firstName: string,
+        lastName: string,
+        age: number,
+        phoneNumber: number,
     }
-
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<ForemValue>();
-    const onSubmit = (data: dataType) => {
-        dispach(AddItem(data));
+    // debugger
+    // const defultvalue: ForemValue = {
+    //     firstName: item.firstName,
+    //     lastName: item.lastName,
+    //     age: item.age,
+    //     phoneNumber: item.phoneNumber,
+    // }
+    debugger
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ForemValue>()
+    const onSubmit = () => {
+        // debugger
+        dispach(EditItem(item))
+        console.log(item);
     }
 
     const style = {
@@ -76,16 +84,16 @@ const ModalEdit = (props: ModalEditType) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Box>
                                 <Box mt={2}>
-                                    <TextField {...register('firstname', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstname'} variant="standard" />
+                                    <TextField defaultValue={item?.firstName} {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstname'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('lastname', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
+                                    <TextField defaultValue={item?.lastName} {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('age', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'age'} variant="standard" />
+                                    <TextField defaultValue={item?.age}  {...register('age', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('phonenumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
+                                    <TextField defaultValue={item?.phoneNumber}  {...register('phoneNumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>

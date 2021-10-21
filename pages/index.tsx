@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { dataType } from '../action/model/statemodel'
-import { DeleteItem } from '../action'
+import { DeleteItem, SetItem } from '../action'
 import ModalEdit from '../component/modal-edit/modaledit'
 
 const Home: NextPage = () => {
@@ -21,29 +21,30 @@ const Home: NextPage = () => {
   const handelDelete = (item: dataType) => {
     dispach(DeleteItem(item))
   }
-  const handeleEdit = (index: number) => {
-    console.log(index);
-    //  dispach(SetIndex(index))
+  const handeleEdit = (item: dataType) => {
+    debugger
+
+    dispach(SetItem(item));
   }
   return (
     <div className={styles.container}>
       <ModalBoxs />
       {data.map((item, index) => {
         return (
-          <Grid container
+          <Grid key={item.id} container
             direction="row"
             justifyContent="center"
             alignItems="center" spacing={2}>
             <Grid item xs={12} md={2}>
               <Box>
                 <Box sx={{ textAlign: 'center', m: 1 }}><h3>firstname</h3></Box>
-                <Box sx={{ textAlign: 'center', m: 1 }}>{item.firstname}</Box>
+                <Box sx={{ textAlign: 'center', m: 1 }}>{item.firstName}</Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={2}>
               <Box>
                 <Box sx={{ textAlign: 'center', m: 1 }}><h3>lastname</h3></Box>
-                <Box sx={{ textAlign: 'center', m: 1 }}>{item.lastname}</Box>
+                <Box sx={{ textAlign: 'center', m: 1 }}>{item.lastName}</Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={2}>
@@ -55,12 +56,12 @@ const Home: NextPage = () => {
             <Grid item xs={12} md={2}>
               <Box>
                 <Box sx={{ textAlign: 'center', m: 1 }}><h3>phonenumber</h3></Box>
-                <Box sx={{ textAlign: 'center', m: 1 }}>{item.phonenumber}</Box>
+                <Box sx={{ textAlign: 'center', m: 1 }}>{item.phoneNumber}</Box>
               </Box>
             </Grid>
             <Grid sx={{ display: 'flex', gap: 1 }} item xs={12} md={2} >
               <Button onClick={() => handelDelete(item)} variant="contained">Delete</Button>
-              <Box onClick={() => handeleEdit(index)} > <ModalEdit /> </Box>
+              <Box onClick={() => handeleEdit(item)} > <ModalEdit /> </Box>
             </Grid>
           </Grid>
         )

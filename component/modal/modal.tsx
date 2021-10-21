@@ -7,31 +7,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AddItem } from '../../action';
+import { reduserDtae } from '../../reduser';
+import { dataType } from '../../action/model/statemodel';
 
 type ModalBoxsType = {
     ModatTitle?: string;
     paragraph?: string;
 }
 const ModalBoxs = (props: ModalBoxsType) => {
+    const reducerData = useSelector(reduserDtae);
+
     const dispach = useDispatch();
-    type dataType = {
-        farstname: string;
-        lastname: string;
-        age: number;
-        phonenumber: number;
-    }
-    type ForemValue = {
-        firstname: string,
-        lastname: string,
-        age: string,
-        phonenumber: string,
-    }
-
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<ForemValue>();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<dataType>();
     const onSubmit = (data: dataType) => {
+        // const _data = {};
+        
+        // Object.assign(_data, data , {id : reducerData.length + 1});
+        
+        // console.log("_data =>",_data);
+
         dispach(AddItem(data));
     }
 
@@ -75,16 +71,16 @@ const ModalBoxs = (props: ModalBoxsType) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Box>
                                 <Box mt={2}>
-                                    <TextField {...register('firstname', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstname'} variant="standard" />
+                                    <TextField {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstName'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('lastname', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
+                                    <TextField {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastName'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
                                     <TextField {...register('age', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('phonenumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
+                                    <TextField {...register('phoneNumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phoneNumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>

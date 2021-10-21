@@ -1,8 +1,9 @@
 export type dataType = {
-    firstname?: string;
-    lastname?: string;
-    age?: number;
-    phonenumber?: number;
+    id:number;
+    firstName: string;
+    lastName: string;
+    age: number;
+    phoneNumber: number;
 }
 export type stateModel = {
     dataReduser:dataType[];

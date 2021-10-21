@@ -23,10 +23,10 @@ export const DeleteItem = (item: dataType) => {
         payload: item
     }
 }
-export const EditItem = (item: dataType, index: number) => {
+export const EditItem = (item: dataType) => {
     return {
         type: 'EDITITEM',
-        payload: [index, item]
+        payload: item
     }
 }
 export const SetIndex = (index: number) => {
