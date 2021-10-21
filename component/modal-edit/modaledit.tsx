@@ -90,10 +90,10 @@ const ModalEdit = (props: ModalEditType) => {
                                     <TextField defaultValue={item?.lastName} {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.age}  {...register('age', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'age'} variant="standard" />
+                                    <TextField defaultValue={item?.age}  {...register('age', { required: true,maxLength:3  })} sx={{ width: 1 }} type='number'  id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.phoneNumber}  {...register('phoneNumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
+                                    <TextField defaultValue={item?.phoneNumber}   {...register('phoneNumber', { required: true,maxLength:11 })} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>

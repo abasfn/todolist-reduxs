@@ -23,10 +23,13 @@ const ModalBoxs = (props: ModalBoxsType) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<dataType>();
     const onSubmit = (data: dataType) => {
         // const _data = {};
-        
+
         // Object.assign(_data, data , {id : reducerData.length + 1});
-        
+
         // console.log("_data =>",_data);
+
+           console.log(errors);
+           
 
         dispach(AddItem(data));
     }
@@ -77,10 +80,10 @@ const ModalBoxs = (props: ModalBoxsType) => {
                                     <TextField {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastName'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('age', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'age'} variant="standard" />
+                                    <TextField   {...register('age', { required: true, maxLength: 3 })} sx={{ width: 1 }} type='number' id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField {...register('phoneNumber', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'phoneNumber'} variant="standard" />
+                                    <TextField    {...register('phoneNumber', { required: true, maxLength: 11})} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>
