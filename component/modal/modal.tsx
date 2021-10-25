@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddItem } from '../../action';
 import { reduserDtae } from '../../reduser';
-import { dataType } from '../../action/model/statemodel';
+import { dataType } from '../../model/statemodel';
 
 type ModalBoxsType = {
     ModatTitle?: string;
@@ -21,20 +21,12 @@ const ModalBoxs = (props: ModalBoxsType) => {
     const reducerData = useSelector(reduserDtae);
 
     const dispach = useDispatch();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<dataType>();
-   
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<dataType>();
+
     const onSubmit = (data: dataType) => {
-
-        // const _data = {};
-
-        // Object.assign(_data, data , {id : reducerData.length + 1});
-
-        // console.log("_data =>",_data);
-      
-
         dispach(AddItem(data));
+        reset();
     }
-
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -48,14 +40,9 @@ const ModalBoxs = (props: ModalBoxsType) => {
     };
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () =>{
-        if (errors) {
-            alert('abas')
-            return
-        }
+    const handleClose = () => {
         setOpen(false);
-
-    } 
+    }
 
     return (
         <div>
@@ -83,7 +70,6 @@ const ModalBoxs = (props: ModalBoxsType) => {
                             <Box>
                                 <Box mt={2}>
                                     <TextField {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstName'} variant="standard" />
-                                    {errors.firstName&&<p>this is the reuired</p>}
                                 </Box>
                                 <Box mt={2}>
                                     <TextField {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastName'} variant="standard" />

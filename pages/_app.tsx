@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const createMainReduser = () => {
     const rootReduser = combineReducers({
       dataReduser: dataReduser,
-      ItemReduser:ItemReduser,
+      ItemReduser:ItemReduser
     });
     const store = createStore(rootReduser);
     return store

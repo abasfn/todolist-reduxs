@@ -9,9 +9,9 @@ import styles from '../styles/Home.module.css'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { dataType } from '../action/model/statemodel'
 import { DeleteItem, SetItem } from '../action'
 import ModalEdit from '../component/modal-edit/modaledit'
+import { dataType } from '../model/statemodel'
 
 const Home: NextPage = () => {
   const item = useSelector(RoteItemreduser);
@@ -21,10 +21,8 @@ const Home: NextPage = () => {
   const handelDelete = (item: dataType) => {
     dispach(DeleteItem(item))
   }
-  const handeleEdit = (item: dataType) => {
-    debugger
-
-    dispach(SetItem(item));
+  const handeleEdit = (item: dataType,index:number) => {
+    dispach(SetItem(item,index));
   }
   return (
     <div className={styles.container}>
@@ -61,7 +59,7 @@ const Home: NextPage = () => {
             </Grid>
             <Grid sx={{ display: 'flex', gap: 1 }} item xs={12} md={2} >
               <Button onClick={() => handelDelete(item)} variant="contained">Delete</Button>
-              <Box onClick={() => handeleEdit(item)} > <ModalEdit /> </Box>
+              <Box onClick={() => handeleEdit(item,index)} > <ModalEdit /> </Box>
             </Grid>
           </Grid>
         )

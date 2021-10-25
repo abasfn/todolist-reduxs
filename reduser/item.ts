@@ -1,24 +1,20 @@
 import { AnyAction } from "redux"
-import { dataType, stateModel } from "../action/model/statemodel"
-export const ItemReduser = (state: dataType[] = [], action: AnyAction) => {
-    // if (action.type === 'SETDATA') {
-    //     state = { ...action.payload }
-    //     return { ...state}
-    // }
-    // return { ...state}
-    // switch(action.type){
-    //     case "SETDATA":
-    //         state = action.payload;
-    //         return action.payload;
-    //         default:
-    //             return state
-    // }
+import { Item, stateModel } from "../model/statemodel";
+
+const inishalStae: Item = {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    id: -1,
+    age: '-1',
+    index: -1
+}
+export const ItemReduser = (state: Item = inishalStae, action: AnyAction) => {
     if (action.type === 'SETDATA') {
-        state = action.payload;
-        console.log(state);
-        
-        return action.payload
+        let data = action.payload[0];
+        data.index = action.payload[1]
+        state = data;
     }
-    return state
+    return state;
 }
 export const RoteItemreduser = (state: stateModel) => state.ItemReduser;

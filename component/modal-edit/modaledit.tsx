@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditItem } from '../../action';
 import { RoteItemreduser } from '../../reduser/item';
-import { dataType } from '../../action/model/statemodel';
+import { dataType } from '../../model/statemodel';
 
 type ModalEditType = {
     ModatTitle?: string;
@@ -19,16 +19,14 @@ type ModalEditType = {
 }
 const ModalEdit = (props: ModalEditType) => {
     const item = useSelector(RoteItemreduser);
-    console.log(item);
-
     const dispach = useDispatch();
-
     type ForemValue = {
         firstName: string,
         lastName: string,
-        age: number,
-        phoneNumber: number,
+        age: string,
+        phoneNumber: string,
     }
+
     // debugger
     // const defultvalue: ForemValue = {
     //     firstName: item.firstName,
@@ -36,14 +34,12 @@ const ModalEdit = (props: ModalEditType) => {
     //     age: item.age,
     //     phoneNumber: item.phoneNumber,
     // }
-    debugger
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<ForemValue>()
-    const onSubmit = () => {
-        // debugger
-        dispach(EditItem(item))
-        console.log(item);
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<ForemValue>();
+    const onSubmit = (data: dataType) => {
+        debugger
+        dispach(EditItem(item.index, data));
+        reset();
     }
-
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -55,10 +51,10 @@ const ModalEdit = (props: ModalEditType) => {
         boxShadow: 24,
         p: 4,
     };
+
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     return (
         <div>
             <Button onClick={handleOpen} variant="contained">Edit</Button>
@@ -82,18 +78,19 @@ const ModalEdit = (props: ModalEditType) => {
                             {props.paragraph}
                         </Typography>
                         <form onSubmit={handleSubmit(onSubmit)}>
+                            -{JSON.stringify(item)}-
                             <Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.firstName} {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstname'} variant="standard" />
+                                    <TextField placeholder={item.firstName} {...register('firstName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'firstname'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.lastName} {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
+                                    <TextField placeholder={item.lastName} {...register('lastName', { required: true })} sx={{ width: 1 }} id="standard-basic" label={'lastname'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.age}  {...register('age', { required: true,maxLength:3  })} sx={{ width: 1 }} type='number'  id="standard-basic" label={'age'} variant="standard" />
+                                    <TextField placeholder={item.age}  {...register('age', { required: true, maxLength: 3 })} sx={{ width: 1 }} type='number' id="standard-basic" label={'age'} variant="standard" />
                                 </Box>
                                 <Box mt={2}>
-                                    <TextField defaultValue={item?.phoneNumber}   {...register('phoneNumber', { required: true,maxLength:11 })} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
+                                    <TextField placeholder={item.phoneNumber}   {...register('phoneNumber', { required: true, maxLength: 11 })} type='number' sx={{ width: 1 }} id="standard-basic" label={'phonenumber'} variant="standard" />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', p: 1, bgcolor: 'background.paper' }}>

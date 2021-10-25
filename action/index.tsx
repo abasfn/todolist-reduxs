@@ -1,4 +1,4 @@
-import { dataType } from "./model/statemodel"
+import { dataType } from "../model/statemodel"
 
 export const ModalAction = () => {
     return {
@@ -11,10 +11,10 @@ export const AddItem = (item: dataType) => {
         payload: item
     }
 }
-export const SetItem = (item: dataType) => {
+export const SetItem = (item: dataType, index: number) => {
     return {
         type: 'SETDATA',
-        payload: item
+        payload: [item, index]
     }
 }
 export const DeleteItem = (item: dataType) => {
@@ -23,10 +23,10 @@ export const DeleteItem = (item: dataType) => {
         payload: item
     }
 }
-export const EditItem = (item: dataType) => {
+export const EditItem = (index: number, item: dataType) => {
     return {
         type: 'EDITITEM',
-        payload: item
+        payload: [index, item]
     }
 }
 export const SetIndex = (index: number) => {
